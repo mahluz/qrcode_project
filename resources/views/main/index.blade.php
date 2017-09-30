@@ -47,6 +47,20 @@ var data = {
     resultFunction: function(result) {
         $('#result').html(result.format+" : "+result.code);
         $("#imgResult").attr('src',result.imgData);
+
+        $.ajax({
+        	method:"post",
+        	url:"{{url('api/readData')}}",
+        	data:{
+        		data:result.code,
+        		_token:"{{csrf_token()}}"
+        	}
+        }).done(function(callback){
+        	console.log("success",callback);
+        }).fail(function(error){
+        	console.log("error");
+        });
+
     }, beep:"{{url('public/audio/beep.mp3')}}"
 };
 

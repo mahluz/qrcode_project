@@ -19,9 +19,20 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware'=>'web'],function(){
 
-Route::get('main','MainController@index');
+// Route::get('people','PeopleController@index');
+	Route::get('cpanel','CpanelController@index')->name('cpanel');
 
-Route::get('people','PeopleController@index');
+	Route::group(['prefix'=>'cpanel'],function(){
 
+
+
+	});
+	// end cpanel group
 });
-// end middleware web 
+// end middleware web
+
+Route::group(['middleware'=>'api','prefix'=>'api'],function(){
+	Route::post('readData','PeopleController@readData');
+});
+
+Route::get('test','PeopleController@test'); 
