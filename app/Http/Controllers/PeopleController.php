@@ -2,50 +2,69 @@
 
 namespace App\Http\Controllers;
 
+use App\Absent;
+use App\Bill;
+use App\People;
+
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
-use App\People;
-use App\Absent;
-use Carbon\Carbon;
+class PeopleController extends Controller {
+	public function index() {
 
-class PeopleController extends Controller
-{
-    public function index(){
+		return view('people.index');
+	}
+	public function readData(Request $request) {
+		$data["people"] = People::where('qrcode', $request["data"])->first();
+		$data["denda"]  = Bill::get();
+		// return Carbon::now();
+		// ($data) ? $result = $data : $result = "data not found";
 
-    	return view('people.index');
-    }
-    public function readData(Request $request){
-    	$data["people"] = People::where('qrcode',$request["data"])->first();
+		if ($data["people"]) {
+			$data["absent"] = Absent::where('people_id', $data["people"]->id)->where('date_absent', date('Y-m-d', strtotime(Carbon::now())))->first();
+			if ($data["absent"]) {
+				$result = "You are already signed";
+			} else {
 
-    	// ($data) ? $result = $data : $result = "data not found";
+				$denda = 0;
+				foreach ($data["denda"] as $index => $ini):
+				if (date('H', strtotime(Carbon::now())) >= $ini->start_at && date('H', strtotime(Carbon::now())) <= $ini->end_at) {
+					$denda = $ini->bill;
+				}
+				endforeach;
 
-    	if ($data["people"]) {
-    		$data["absent"] = Absent::where('people_id',$data["people"]->id)->where('date_absent',date('Y-m-d',strtotime(Carbon::now())))->first();
-    		if($data["absent"]){
-    			$result = "You are already signed";
-    		} 
-    		else {
-    			$db["absent"] = Absent::create([
-    				"people_id" => $data["people"]->id,
-    				"date_absent" => date('Y-m-d',strtotime(Carbon::now())),
-    				"status" => (date('H',strtotime(Carbon::now())) >= 7 ? "telat" : "masuk tepat waktu"),
-    				]);
-    			$result = $db["absent"]->status;
-    		}
-    		// $result = "lalala";
-    	} else {
-    		$result = "data not found";
-    	}
+				$db["absent"] = Absent::create([
+						"people_id"   => $data["people"]->id,
+						"date_absent" => date('Y-m-d', strtotime(Carbon::now())),
+						"status"      => (date('H', strtotime(Carbon::now()) >= 7))?"telat":"masuk tepat waktu",
+						"bill"        => $denda,
+					]);
+				// return $db["absent"];
+				return $db["absent"];
+				$result = $db["absent"]->status;
+			}
+			// $result = "lalala";
+		} else {
+			$result = "data not found";
+		}
 
-    	return Response::json($result);
-    }
+		return Response::json($result);
+	}
 
-    public function test(){
-    	$data = date('Y-m-d H:i',strtotime(Carbon::now()));
-    	$data2 = Carbon::now();
-    	$data3 = Absent::get();
-    	$data4 = (int)date('i',strtotime(Carbon::now()));
-    	return (date('H',strtotime(Carbon::now())) >= 7  ? "telat" : "masuk tepat waktu");
-    }
+	public function test() {
+		$data  = date('Y-m-d H:i', strtotime(Carbon::now()));
+		$data2 = Carbon::now();
+		$data3 = Absent::get();
+		$data4 = (int) date('i', strtotime(Carbon::now()));
+		// return Carbon::now();
+		// return date('H:i', strtotime(Carbon::now()));
+		if (date('H:i', strtotime(Carbon::now())) >= "10:00" && date('H:i', strtotime(Carbon::now())) <= "10:17") {
+			$denda = 10;
+			return "telat";
+		} else {
+			$denda = 0;
+			return "tidak telat";
+		}
+	}
 }
