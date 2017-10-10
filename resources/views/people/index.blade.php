@@ -13,19 +13,31 @@
 					People Management
 				</div>
 				<div class="panel-body">
-					<table id="table" class="table table-bordered">
-						<thead>
-							<tr>
-								<td>No.</td>
-								<td>Nama</td>
-								<td>Barcode</td>
-								<td>Action</td>
-							</tr>
-						</thead>
-						<tbody>
-							
-						</tbody>
-					</table>
+					<div class="table-responsive">
+						<table id="table" class="table table-bordered">
+							<thead>
+								<tr>
+									<td>No.</td>
+									<td>Nama</td>
+									<td>Barcode</td>
+									<td>Action</td>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($people as $index =>$ini)
+								<tr>
+									<td>{{ $index+1 }}</td>
+									<td>{{ $ini->name }}</td>
+									<td>{{ $ini->qrcode }}</td>
+									<td>
+										<button type="button" class="btn btn-warning">Edit</button>
+										<button type="button" class="btn btn-danger">Delete</button>
+									</td>
+								</tr>
+								@endforeach		
+							</tbody>
+						</table>	
+					</div>
 				</div>
 			</div>
 

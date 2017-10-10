@@ -96,7 +96,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    This is QR Code Absent 
+                    This is QR Code Absent
                 </div>
 
                 <div class="links">
@@ -111,7 +111,8 @@
         @yield('content')
         <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
         <!-- CORE JQUERY  -->
-        <script src="{{url('public/js/jquery-1.10.2.js')}}"></script>
+        <script src="{{url('public/js/jquery-1.11.1.min.js')}}"></script>
+
         <!-- BOOTSTRAP SCRIPTS  -->
         <script src="{{url('public/js/bootstrap.min.js')}}"></script>
         <!-- DATATABLE SCRIPTS  -->

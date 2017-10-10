@@ -68,8 +68,10 @@
                 <div class="col-md-12">
                     <div class="navbar-collapse collapse ">
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
-                            <li><a href="{{url('main')}}" @yield('schedule-active') ><i class="fa fa-calendar-o"></i> Absent Data</a></li>
-                            <li><a href="{{url('people')}}" @yield('order-active') ><i class="fa fa-group"></i> People</a></li>
+                            <li><a href="{{url('cpanel')}}" @yield('schedule-active') ><i class="fa fa-calendar-o"></i> Absent Data</a></li>
+                            <li><a href="{{url('cpanel/people')}}" @yield('order-active') ><i class="fa fa-group"></i> People</a></li>
+                            <li><a href="{{url('cpanel/bill')}}" @yield('bill-active') ><i class="fa fa-scissors"></i> Bill</a></li>
+                            <li><a href="{{url('cpanel/salary')}}" @yield('salary-active') ><i class="fa fa-money"></i> Salary</a></li>
                             {{-- <li><a href="{{url('admin/staff')}}" @yield('staff-active') ><i class="fa fa-group"></i> Staff</a></li> --}}
                             <!-- /.dropdown -->
                         </ul>
@@ -100,7 +102,8 @@
       <!-- FOOTER SECTION END-->
     <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
     <!-- CORE JQUERY  -->
-    <script src="{{url('public/js/jquery-1.10.2.js')}}"></script>
+    <script src="{{url('public/js/jquery-3.2.1.min.js')}}"></script>
+    {{-- <script src="{{ url('public/js/jquery-3.2.1.min.map') }}"></script> --}}
     <!-- BOOTSTRAP SCRIPTS  -->
     <script src="{{url('public/js/bootstrap.min.js')}}"></script>
     <!-- DATATABLE SCRIPTS  -->
@@ -120,5 +123,12 @@
     <script src="{{url('public/js/webcodecamjs.js')}}"></script>
     <script src="{{url('public/js/webcodecamjquery.js')}}"></script>
     @yield('script')
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $("#table").DataTable();
+
+        });
+    </script>
 </body>
 </html>

@@ -17,6 +17,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('checking',function(){
+
+	if(Auth::check()){
+		return redirect('cpanel');
+	}
+
+});
+
 Route::group(['middleware'=>'web'],function(){
 
 // Route::get('people','PeopleController@index');
@@ -24,7 +32,17 @@ Route::group(['middleware'=>'web'],function(){
 
 	Route::group(['prefix'=>'cpanel'],function(){
 
+		Route::get('bill','BillController@index');
+		Route::group(['prefix'=>'bill'],function(){
 
+		});
+		// end bill group
+
+		Route::get('people','PeopleController@index');
+		Route::group(['prefix'=>'people'],function(){
+
+		});
+		// end people group
 
 	});
 	// end cpanel group
@@ -33,6 +51,7 @@ Route::group(['middleware'=>'web'],function(){
 
 Route::group(['middleware'=>'api','prefix'=>'api'],function(){
 	Route::post('readData','PeopleController@readData');
+	Route::post('getData','PeopleController@getData');
 });
 
 Route::get('test','PeopleController@test'); 

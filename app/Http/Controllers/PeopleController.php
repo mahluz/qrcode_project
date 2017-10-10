@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Absent;
 use App\Bill;
 use App\People;
+use App\Sallary;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -12,8 +13,8 @@ use Illuminate\Support\Facades\Response;
 
 class PeopleController extends Controller {
 	public function index() {
-
-		return view('people.index');
+		$data["people"]=People::get();
+		return view('people.index',$data);
 	}
 	public function readData(Request $request) {
 		$data["people"] = People::where('qrcode', $request["data"])->first();
@@ -66,5 +67,12 @@ class PeopleController extends Controller {
 			$denda = 0;
 			return "tidak telat";
 		}
+	}
+	public function getData(Request $request){
+		$data["absent"] = People::join('absents','peoples.id','=','absents.people_id')
+							->where('people_id',$request["id"])->get();
+		$data["sallary"] = Sallary::where('people_id',$request["id"])->first();
+		$data["date"] = date("M",strtotime("2017-10"));
+		return Response::json($data);
 	}
 }
