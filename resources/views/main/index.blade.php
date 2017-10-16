@@ -33,10 +33,11 @@
 	<hr>
 </div>
 
+@endsection
+@section('footer')
 <div class="container footer">
 	<div class="pull-right">copyright <a href="facebook.com/zulham.achmad">Zulham Azwar Achmad</a> as Full-stack Developer in <a href="">Pt Ardata Indonesia</a></div>
 </div>
-
 @endsection
 @section('script')
 <script type="text/javascript">

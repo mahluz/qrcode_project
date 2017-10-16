@@ -44,6 +44,14 @@ Route::group(['middleware'=>'web'],function(){
 		});
 		// end people group
 
+		Route::get('sallary','SallaryController@index');
+		Route::group(['prefix'=>'sallary'],function(){
+			Route::get('create','SallaryController@create');
+			Route::post('store','SallaryController@store');
+			Route::post('delete','SallaryController@delete');
+		});
+		// end sallary group
+
 	});
 	// end cpanel group
 });

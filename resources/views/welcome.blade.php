@@ -29,14 +29,6 @@
         @yield('css')
         <!-- Styles -->
         <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
 
             .full-height {
                 height: 100vh;
@@ -94,21 +86,12 @@
                 </div>
             @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    This is QR Code Absent
-                </div>
 
-                <div class="links">
-                    {{-- <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a> --}}
-                </div>
-            </div>
-        </div>
         @yield('content')
+
+        </div>
+
+        @yield('footer')
         <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
         <!-- CORE JQUERY  -->
         <script src="{{url('public/js/jquery-1.11.1.min.js')}}"></script>

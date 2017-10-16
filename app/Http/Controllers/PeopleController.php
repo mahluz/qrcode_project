@@ -71,7 +71,7 @@ class PeopleController extends Controller {
 	public function getData(Request $request){
 		$data["absent"] = People::join('absents','peoples.id','=','absents.people_id')
 							->where('people_id',$request["id"])->get();
-		$data["sallary"] = Sallary::where('people_id',$request["id"])->first();
+		$data["sallary"] = Sallary::where('people_id',$request["id"])->get();
 		$data["date"] = date("M",strtotime("2017-10"));
 		return Response::json($data);
 	}

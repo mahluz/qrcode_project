@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="" />
     <meta name="author" content="" />
     <!--[if IE]>
@@ -71,7 +72,7 @@
                             <li><a href="{{url('cpanel')}}" @yield('schedule-active') ><i class="fa fa-calendar-o"></i> Absent Data</a></li>
                             <li><a href="{{url('cpanel/people')}}" @yield('order-active') ><i class="fa fa-group"></i> People</a></li>
                             <li><a href="{{url('cpanel/bill')}}" @yield('bill-active') ><i class="fa fa-scissors"></i> Bill</a></li>
-                            <li><a href="{{url('cpanel/salary')}}" @yield('salary-active') ><i class="fa fa-money"></i> Salary</a></li>
+                            <li><a href="{{url('cpanel/sallary')}}" @yield('salary-active') ><i class="fa fa-money"></i> Salary</a></li>
                             {{-- <li><a href="{{url('admin/staff')}}" @yield('staff-active') ><i class="fa fa-group"></i> Staff</a></li> --}}
                             <!-- /.dropdown -->
                         </ul>
